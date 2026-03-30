@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&family=Silkscreen:wght@400;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 240 6% 7%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 5% 11%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 5% 11%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 272 99% 69%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 4% 55%;
+
+    --accent: 282 90% 72%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 4% 18%;
+    --input: 240 4% 18%;
+    --ring: 272 99% 69%;
+
+    --radius: 0.75rem;
+
+    --glow: 272 99% 69%;
+    --surface: 240 5% 14%;
+    --surface-hover: 240 5% 18%;
+
+    --sidebar-background: 240 5% 9%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 272 99% 69%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 240 4% 18%;
+    --sidebar-ring: 272 99% 69%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    cursor: url('/cursors/cursor_normal.png'), auto;
+  }
+
+  a, button, [role="button"], input[type="submit"], select, label, summary,
+  [onclick], .cursor-pointer {
+    cursor: url('/cursors/cursor_clickable.png'), pointer;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+  }
+
+  [dir="rtl"] body,
+  [dir="rtl"] {
+    font-family: 'Noto Kufi Arabic', 'Space Grotesk', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.3);
+  }
+
+  .glow-md {
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
+  }
+}
