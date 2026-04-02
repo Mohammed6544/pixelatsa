@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { SiDiscord } from "react-icons/si";
 import logo from "@/assets/logo.jpg";
 
 const Header = () => {
