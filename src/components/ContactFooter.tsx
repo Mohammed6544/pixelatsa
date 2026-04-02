@@ -1,46 +1,10 @@
-import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Loader2, CheckCircle } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { SiX, SiDiscord, SiYoutube } from "react-icons/si";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 
 const ContactFooter = () => {
-  const { t, lang } = useLanguage();
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const trimmed = email.trim();
-    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-      toast.error(lang === "ar" ? "يرجى إدخال بريد إلكتروني صحيح" : "Please enter a valid email");
-      return;
-    }
-
-    setLoading(true);
-    const { error } = await supabase
-      .from("newsletter_subscribers")
-      .insert({ email: trimmed });
-
-    setLoading(false);
-
-    if (error) {
-      if (error.code === "23505") {
-        toast.info(lang === "ar" ? "أنت مشترك بالفعل!" : "You're already subscribed!");
-      } else {
-        toast.error(lang === "ar" ? "حدث خطأ، حاول مجدداً" : "Something went wrong. Please try again.");
-      }
-      return;
-    }
-
-    setSubscribed(true);
-    setEmail("");
-    toast.success(lang === "ar" ? "تم الاشتراك بنجاح!" : "Successfully subscribed!");
-  };
+  const { t } = useLanguage();
 
   return (
     <section id="contact" className="py-24 sm:py-32 bg-secondary/20">
@@ -110,34 +74,16 @@ const ContactFooter = () => {
           >
             <h3 className="text-xl font-semibold mb-2">{t("contact.newsletter")}</h3>
             <p className="text-muted-foreground text-sm mb-6">{t("contact.newsletterSub")}</p>
-
-            {subscribed ? (
-              <div className="flex items-center gap-3 text-primary">
-                <CheckCircle size={20} />
-                <span className="font-medium">
-                  {lang === "ar" ? "شكراً لاشتراكك!" : "Thanks for subscribing!"}
-                </span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t("contact.placeholder")}
-                  disabled={loading}
-                  className="flex-1 px-4 py-3 rounded-lg bg-secondary text-foreground placeholder:text-muted-foreground border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm disabled:opacity-50"
-                />
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity whitespace-nowrap disabled:opacity-50 flex items-center gap-2"
-                >
-                  {loading && <Loader2 size={16} className="animate-spin" />}
-                  {t("contact.subscribe")}
-                </button>
-              </form>
-            )}
+            <div className="flex gap-3">
+              <input
+                type="email"
+                placeholder={t("contact.placeholder")}
+                className="flex-1 px-4 py-3 rounded-lg bg-secondary text-foreground placeholder:text-muted-foreground border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+              />
+              <button className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity whitespace-nowrap">
+                {t("contact.subscribe")}
+              </button>
+            </div>
           </motion.div>
         </div>
       </div>
