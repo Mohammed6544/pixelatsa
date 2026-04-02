@@ -94,6 +94,16 @@ const Header = () => {
                   {t(`nav.${link.key}`)}
                 </a>
               ))}
+              <a
+                href="https://discord.gg/vdv9dxWe"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                <SiDiscord size={16} />
+                {lang === "en" ? "Join our Discord" : "انضم لديسكورد"}
+              </a>
               <button
                 onClick={() => {
                   setLang(lang === "en" ? "ar" : "en");

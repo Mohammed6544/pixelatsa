@@ -19,7 +19,7 @@ const ContactFooter = () => {
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-lg">{t("contact.subtitle")}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div className="max-w-xl mx-auto">
           {/* Contact info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
