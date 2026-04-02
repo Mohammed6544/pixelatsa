@@ -131,7 +131,7 @@ const FeaturedGameCard = ({ game }: { game: Game }) => {
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 text-sm font-bold text-primary"
                 >
-                  <Sparkles size={16} />
+                  <SiSteam size={18} />
                   {t("games.comingSoon")}
                 </motion.div>
               </div>
