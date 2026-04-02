@@ -19,13 +19,12 @@ const ContactFooter = () => {
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-lg">{t("contact.subtitle")}</p>
         </motion.div>
 
-        <div className="max-w-xl mx-auto">
-          {/* Contact info */}
+        <div className="flex flex-col items-center gap-8 max-w-lg mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="flex flex-col items-center gap-6"
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -45,26 +44,32 @@ const ContactFooter = () => {
                 <p className="font-medium">{t("contact.location")}</p>
               </div>
             </div>
-            <div className="flex gap-4 pt-4">
-              {[
-                { icon: SiX, href: "https://x.com/PixelatGames", label: "Twitter" },
-                { icon: SiYoutube, href: "https://www.youtube.com/@pixelatgames", label: "YouTube" },
-                { icon: SiDiscord, href: "https://discord.gg/vdv9dxWe", label: "Discord" },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="w-11 h-11 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-125 transition-all duration-200"
-                >
-                  <social.icon size={20} />
-                </a>
-              ))}
-            </div>
           </motion.div>
 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="flex gap-4"
+          >
+            {[
+              { icon: SiX, href: "https://x.com/PixelatGames", label: "Twitter" },
+              { icon: SiYoutube, href: "https://www.youtube.com/@pixelatgames", label: "YouTube" },
+              { icon: SiDiscord, href: "https://discord.gg/vdv9dxWe", label: "Discord" },
+            ].map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-200"
+              >
+                <social.icon size={20} />
+              </a>
+            ))}
+          </motion.div>
         </div>
       </div>
 
