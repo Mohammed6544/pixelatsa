@@ -56,7 +56,7 @@ const ContactFooter = () => {
             {[
               { icon: SiX, href: "https://x.com/PixelatGames", label: "Twitter" },
               { icon: SiYoutube, href: "https://www.youtube.com/@pixelatgames", label: "YouTube" },
-              { icon: SiDiscord, href: "https://discord.gg/vdv9dxWe", label: "Discord" },
+              { icon: SiDiscord, href: "https://discord.gg/8hsMbyZyxR", label: "Discord" },
             ].map((social) => (
               <a
                 key={social.label}

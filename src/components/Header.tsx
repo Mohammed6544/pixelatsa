@@ -48,7 +48,7 @@ const Header = () => {
             </a>
           ))}
           <a
-            href="https://discord.gg/vdv9dxWe"
+            href="https://discord.gg/8hsMbyZyxR"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-md text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
@@ -95,7 +95,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="https://discord.gg/vdv9dxWe"
+                href="https://discord.gg/8hsMbyZyxR"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
