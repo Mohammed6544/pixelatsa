@@ -19,7 +19,7 @@ const ContactFooter = () => {
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-lg">{t("contact.subtitle")}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div className="max-w-xl mx-auto">
           {/* Contact info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -65,26 +65,6 @@ const ContactFooter = () => {
             </div>
           </motion.div>
 
-          {/* Newsletter */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="bg-card rounded-xl border border-border p-8"
-          >
-            <h3 className="text-xl font-semibold mb-2">{t("contact.newsletter")}</h3>
-            <p className="text-muted-foreground text-sm mb-6">{t("contact.newsletterSub")}</p>
-            <div className="flex gap-3">
-              <input
-                type="email"
-                placeholder={t("contact.placeholder")}
-                className="flex-1 px-4 py-3 rounded-lg bg-secondary text-foreground placeholder:text-muted-foreground border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
-              />
-              <button className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity whitespace-nowrap">
-                {t("contact.subscribe")}
-              </button>
-            </div>
-          </motion.div>
         </div>
       </div>
 

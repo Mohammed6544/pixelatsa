@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { SiDiscord } from "react-icons/si";
 import logo from "@/assets/logo.jpg";
 
 const Header = () => {
@@ -46,6 +47,15 @@ const Header = () => {
               {t(`nav.${link.key}`)}
             </a>
           ))}
+          <a
+            href="https://discord.gg/vdv9dxWe"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-md text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            <SiDiscord size={16} />
+            {lang === "en" ? "Join our Discord" : "انضم لديسكورد"}
+          </a>
           <button
             onClick={() => setLang(lang === "en" ? "ar" : "en")}
             className="px-3 py-1.5 rounded-md text-xs font-bold bg-secondary text-secondary-foreground hover:bg-surface-hover transition-colors"
@@ -84,6 +94,16 @@ const Header = () => {
                   {t(`nav.${link.key}`)}
                 </a>
               ))}
+              <a
+                href="https://discord.gg/vdv9dxWe"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                <SiDiscord size={16} />
+                {lang === "en" ? "Join our Discord" : "انضم لديسكورد"}
+              </a>
               <button
                 onClick={() => {
                   setLang(lang === "en" ? "ar" : "en");
