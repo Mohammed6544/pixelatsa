@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { ExternalLink, Sparkles } from "lucide-react";
+import { SiSteam } from "react-icons/si";
 
 import game1Poster from "@/assets/games/game_1_poster.png";
 import game1Banner from "@/assets/games/game_1_banner.png";
@@ -85,7 +86,7 @@ const FeaturedGameCard = ({ game }: { game: Game }) => {
             transition={{ delay: 0.3, type: "spring" }}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/40 backdrop-blur-sm"
           >
-            <Sparkles size={14} className="text-primary animate-pulse" />
+            <SiSteam size={16} className="text-primary" />
             <span className="text-sm font-bold text-primary">{t("games.comingSoon")}</span>
           </motion.div>
         </div>
@@ -130,7 +131,7 @@ const FeaturedGameCard = ({ game }: { game: Game }) => {
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 text-sm font-bold text-primary"
                 >
-                  <Sparkles size={16} />
+                  <SiSteam size={18} />
                   {t("games.comingSoon")}
                 </motion.div>
               </div>
