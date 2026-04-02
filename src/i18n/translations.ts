@@ -171,7 +171,7 @@ export const translations: Record<Language, Record<string, any>> = {
       title: "ألعابنا",
       subtitle: "استكشف العوالم التي صنعناها.",
       availableOn: "متوفرة على",
-      comingSoon: "قريبًا",
+      comingSoon: "قادمة على Steam",
       game3: {
         title: "المملكة المتبقية",
         description:

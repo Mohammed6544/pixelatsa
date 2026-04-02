@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { ExternalLink, Sparkles } from "lucide-react";
+import { SiSteam } from "react-icons/si";
 
 import game1Poster from "@/assets/games/game_1_poster.png";
 import game1Banner from "@/assets/games/game_1_banner.png";
