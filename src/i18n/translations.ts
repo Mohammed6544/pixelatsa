@@ -70,6 +70,12 @@ export const translations: Record<Language, Record<string, any>> = {
       title: "Our Games",
       subtitle: "Explore the worlds we've crafted.",
       availableOn: "Available on",
+      comingSoon: "Coming Soon",
+      game3: {
+        title: "Remaining Kingdom",
+        description:
+          "A dark fantasy roguelike that fuses deckbuilding, real-time card combat, and tower defense into a single run-based experience. Choose a fallen Lord and fight through a ruined world where every act, battle, relic, and event pushes your build in a different direction. Summon units, cast spells in real time, adapt to shifting encounters, and shape your strategy through cards, potions, relics, and dangerous choices.",
+      },
       game1: {
         title: "What Remains of Her",
         description:
@@ -165,6 +171,12 @@ export const translations: Record<Language, Record<string, any>> = {
       title: "ألعابنا",
       subtitle: "استكشف العوالم التي صنعناها.",
       availableOn: "متوفرة على",
+      comingSoon: "قريبًا",
+      game3: {
+        title: "المملكة المتبقية",
+        description:
+          "لعبة روغ لايك خيالية مظلمة تدمج بناء الرزم والقتال بالبطاقات في الوقت الفعلي والدفاع عن الأبراج في تجربة واحدة قائمة على الجولات. اختر لوردًا ساقطًا وقاتل عبر عالم مدمر حيث كل فعل ومعركة وأثر وحدث يدفع بنيتك في اتجاه مختلف.",
+      },
       game1: {
         title: "ما تبقّى منها",
         description:
