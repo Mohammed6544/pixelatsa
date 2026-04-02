@@ -86,7 +86,7 @@ const FeaturedGameCard = ({ game }: { game: Game }) => {
             transition={{ delay: 0.3, type: "spring" }}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/40 backdrop-blur-sm"
           >
-            <Sparkles size={14} className="text-primary animate-pulse" />
+            <SiSteam size={16} className="text-primary" />
             <span className="text-sm font-bold text-primary">{t("games.comingSoon")}</span>
           </motion.div>
         </div>
