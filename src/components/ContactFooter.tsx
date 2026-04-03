@@ -78,7 +78,7 @@ const ContactFooter = () => {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">{t("contact.copyright")}</p>
           <nav className="flex gap-6 text-sm text-muted-foreground">
-            {["home", "team", "story", "contact"].map((key) => (
+            {["home", "games", "team", "story", "contact"].map((key) => (
               <a key={key} href={`#${key}`} className="hover:text-foreground transition-colors">
                 {t(`nav.${key}`)}
               </a>
