@@ -18,9 +18,9 @@ const Header = () => {
 
   const links = [
     { key: "home", href: "#home" },
+    { key: "games", href: "#games" },
     { key: "team", href: "#team" },
     { key: "story", href: "#story" },
-    { key: "games", href: "#games" },
     { key: "contact", href: "#contact" },
   ];
 
