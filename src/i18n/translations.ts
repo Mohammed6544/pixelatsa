@@ -44,7 +44,7 @@ export const translations: Record<Language, Record<string, any>> = {
           year: "2025 — October",
           title: "First Prototype",
           description:
-            "After months of late nights and relentless iteration, the first playable demo came to life. The reaction from early testers was electric, and that was when we knew we were onto something special.",
+            "After a month of late nights and relentless iteration, the first playable demo came to life. The reaction from early testers was electric, and that was when we knew we were onto something special.",
         },
         {
           year: "2025 — November",
@@ -145,7 +145,7 @@ export const translations: Record<Language, Record<string, any>> = {
           year: "٢٠٢٥ — أكتوبر",
           title: "أول نموذج",
           description:
-            "بعد أشهر من السهر والتكرار المستمر، وُلد أول نموذج قابل للعب. كان رد فعل المختبرين الأوائل مذهلاً، وعندها عرفنا أننا على الطريق الصحيح.",
+            "بعد شهر من السهر والتكرار المستمر، وُلد أول نموذج قابل للعب. كان رد فعل المختبرين الأوائل مذهلاً، وعندها عرفنا أننا على الطريق الصحيح.",
         },
         {
           year: "٢٠٢٥ — نوفمبر",
