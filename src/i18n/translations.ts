@@ -91,6 +91,10 @@ export const translations: Record<Language, Record<string, any>> = {
       title: "Life at the Studio",
       subtitle: "Behind the scenes — where the magic happens.",
     },
+    twitter: {
+      title: "Latest from X",
+      subtitle: "Follow our journey and stay up to date.",
+    },
     contact: {
       title: "Get in Touch",
       subtitle: "We'd love to hear from you. Drop us a line or follow along.",
@@ -191,6 +195,10 @@ export const translations: Record<Language, Record<string, any>> = {
     gallery: {
       title: "الحياة في الاستوديو",
       subtitle: "خلف الكواليس — حيث يحدث السحر.",
+    },
+    twitter: {
+      title: "آخر الأخبار من X",
+      subtitle: "تابع رحلتنا وابقَ على اطلاع.",
     },
     contact: {
       title: "تواصل معنا",
