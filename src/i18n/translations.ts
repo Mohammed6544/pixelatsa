@@ -92,7 +92,7 @@ export const translations: Record<Language, Record<string, any>> = {
       subtitle: "Behind the scenes — where the magic happens.",
     },
     twitter: {
-      title: "Latest from X",
+      title: "Latest News",
       subtitle: "Follow our journey and stay up to date.",
     },
     contact: {
@@ -197,7 +197,7 @@ export const translations: Record<Language, Record<string, any>> = {
       subtitle: "خلف الكواليس — حيث يحدث السحر.",
     },
     twitter: {
-      title: "آخر الأخبار من X",
+      title: "آخر الأخبار",
       subtitle: "تابع رحلتنا وابقَ على اطلاع.",
     },
     contact: {
