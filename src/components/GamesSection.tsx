@@ -126,14 +126,17 @@ const FeaturedGameCard = ({ game }: { game: Game }) => {
               </p>
 
               <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                <motion.div
+                <motion.a
+                  href="https://store.steampowered.com/app/4586090/Remaining_Kingdom/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 text-sm font-bold text-primary"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 text-sm font-bold text-primary hover:bg-primary/20 transition-colors"
                 >
                   <SiSteam size={18} />
                   {t("games.comingSoon")}
-                </motion.div>
+                </motion.a>
               </div>
             </motion.div>
           </div>
