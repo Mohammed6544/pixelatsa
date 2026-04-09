@@ -19,13 +19,13 @@ interface NewsPost {
 const newsPosts: NewsPost[] = [
   {
     platform: "x",
-    url: "https://x.com/PixelatGames",
-    date: "Apr 2026",
-    dateAr: "أبريل ٢٠٢٦",
-    text: "Stay tuned for our latest updates! Follow us on X to be the first to know about Remaining Kingdom and all our upcoming projects. 🎮🔥",
-    textAr: "ترقبوا آخر أخبارنا! تابعونا على X لتكونوا أول من يعرف عن المملكة المتبقية وجميع مشاريعنا القادمة. 🎮🔥",
-    likes: 0,
-    retweets: 0,
+    url: "https://x.com/PixelatGames/status/2042241210538999944",
+    date: "Apr 9, 2026",
+    dateAr: "٩ أبريل ٢٠٢٦",
+    text: "You are humanity's last hope! 🫵\n\nOur Remaining Kingdom page is now LIVE on Steam 🔥!\n\nA hand-drawn pixel-art roguelike deckbuilder with real-time combat, crafted with tremendous effort by our new team.\n\nDemo in May on Steam, official launch in October!\n\nAdd it to your Wishlist — that's the biggest support for us right now 🙏\n\n#indiegame #gamedev #Steam #pixelart #roguelite",
+    textAr: "انت اخر امل للبشرية ! 🫵\n\nصفحتنا Remaining Kingdom صارت لايف على Steam 🔥!\n\nلعبة pixel-art roguelike deckbuilder بقتال لحظي مرسومه باليد و جهود جباره من فريقنا الجديد.\n\nالديمو في مايو على ستيم والإطلاق الرسمي اكتوبر!\n\nأضيفوها للـ Wishlist (قائمة الامنيات) هذا أكبر دعم يفيدنا الآن 🙏\n\n#لعبة_مستقلة #تطوير_ألعاب #ستيم #pixelart #roguelite",
+    likes: 16,
+    retweets: 7,
   },
 ];
 
