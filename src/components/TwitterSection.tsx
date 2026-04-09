@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SiX } from "react-icons/si";
 import { ExternalLink } from "lucide-react";
+import tweetPresentation from "@/assets/tweet-presentation.jpg";
+import tweetGamejam from "@/assets/tweet-gamejam.jpg";
+import tweetRemainingKingdom from "@/assets/tweet-remaining-kingdom.jpg";
 
 interface NewsPost {
   platform: "x" | "linkedin";
