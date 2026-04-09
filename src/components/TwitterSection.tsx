@@ -1,12 +1,54 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SiX } from "react-icons/si";
+import { ExternalLink } from "lucide-react";
 
 const TwitterSection = () => {
   const { t, isRTL } = useLanguage();
-  const [loading, setLoading] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [embedLoaded, setEmbedLoaded] = useState(false);
+  const [embedFailed, setEmbedFailed] = useState(false);
+
+  useEffect(() => {
+    // Try loading Twitter's official widget
+    const timeout = setTimeout(() => {
+      // If after 5 seconds the widget hasn't rendered, show fallback
+      if (!embedLoaded) {
+        setEmbedFailed(true);
+      }
+    }, 5000);
+
+    const loadWidget = () => {
+      if ((window as any).twttr?.widgets) {
+        (window as any).twttr.widgets.load(containerRef.current).then(() => {
+          setEmbedLoaded(true);
+          clearTimeout(timeout);
+        });
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = "https://platform.twitter.com/widgets.js";
+      script.async = true;
+      script.onload = () => {
+        (window as any).twttr?.widgets?.load(containerRef.current).then(() => {
+          setEmbedLoaded(true);
+          clearTimeout(timeout);
+        });
+      };
+      script.onerror = () => {
+        setEmbedFailed(true);
+        clearTimeout(timeout);
+      };
+      document.body.appendChild(script);
+    };
+
+    loadWidget();
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <section className="py-24 px-4 bg-background" dir={isRTL ? "rtl" : "ltr"}>
@@ -31,40 +73,55 @@ const TwitterSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative rounded-xl overflow-hidden border border-border"
+          ref={containerRef}
         >
-          {loading && (
-            <div className="absolute inset-0 z-10 space-y-4 p-4 bg-background">
-              <Skeleton className="h-32 w-full rounded-xl" />
-              <Skeleton className="h-32 w-full rounded-xl" />
-              <Skeleton className="h-32 w-full rounded-xl" />
-            </div>
-          )}
-          <iframe
-            src="https://syndication.twitter.com/srv/timeline-profile/screen-name/PixelatGames?dnt=true&embedId=twitter-widget-0&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ%3D%3D&frame=false&hideBorder=true&hideFooter=true&hideHeader=true&hideScrollBar=false&lang=en&maxHeight=600px&origin=https%3A%2F%2Fpixelatsa.lovable.app&showHeader=false&showReplies=false&theme=dark&transparent=true&widgetsVersion=2615f7e52b7e0%3A1702314776716"
-            style={{ width: "100%", height: "600px", border: "none" }}
-            title="@PixelatGames on X"
-            onLoad={() => setLoading(false)}
-            sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
-          />
-        </motion.div>
+          {/* Twitter embed - hidden if failed */}
+          <div className={embedFailed && !embedLoaded ? "hidden" : ""}>
+            {!embedLoaded && (
+              <div className="space-y-4">
+                <Skeleton className="h-32 w-full rounded-xl" />
+                <Skeleton className="h-32 w-full rounded-xl" />
+                <Skeleton className="h-32 w-full rounded-xl" />
+              </div>
+            )}
+            <a
+              className="twitter-timeline"
+              data-theme="dark"
+              data-height="600"
+              data-chrome="noheader nofooter noborders transparent"
+              href="https://x.com/PixelatGames"
+            >
+              Loading tweets…
+            </a>
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-6"
-        >
-          <a
-            href="https://x.com/PixelatGames"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
-          >
-            <SiX className="w-4 h-4" />
-            {isRTL ? "تابعنا على X" : "Follow us on X"}
-          </a>
+          {/* Fallback when embed fails */}
+          {embedFailed && !embedLoaded && (
+            <a
+              href="https://x.com/PixelatGames"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block group"
+            >
+              <div className="rounded-2xl border border-border bg-card/50 p-8 md:p-12 text-center hover:border-primary/50 transition-all duration-300 hover:bg-card/80">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6 group-hover:bg-primary/20 transition-colors">
+                  <SiX className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
+                  @PixelatGames
+                </h3>
+                <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                  {isRTL
+                    ? "تابعنا على X للحصول على آخر التحديثات والأخبار ومحتوى خلف الكواليس."
+                    : "Follow us on X for the latest updates, news, and behind-the-scenes content."}
+                </p>
+                <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
+                  {isRTL ? "تابعنا على X" : "Follow us on X"}
+                  <ExternalLink className="w-4 h-4" />
+                </span>
+              </div>
+            </a>
+          )}
         </motion.div>
       </div>
     </section>
