@@ -25,6 +25,7 @@ export const teamMembers: TeamMember[] = [
     bio: { en: "Leads the creative and production vision of the studio.", ar: "يقود الرؤية الإبداعية والإنتاجية للاستوديو." },
     category: "leadership",
     image: mohammedImg,
+    linkedin: "https://www.linkedin.com/in/malyami/",
   },
   {
     id: "2",
@@ -33,6 +34,7 @@ export const teamMembers: TeamMember[] = [
     bio: { en: "Crafts the stories and worlds that define our games.", ar: "يصنع القصص والعوالم التي تحدد ألعابنا." },
     category: "design",
     image: abdulazizImg,
+    linkedin: "https://www.linkedin.com/in/abdulaziz-k-alsada-pharm-d-a9242125b/",
   },
   {
     id: "3",
@@ -41,6 +43,7 @@ export const teamMembers: TeamMember[] = [
     bio: { en: "Architects the systems and engines powering our games.", ar: "يبني الأنظمة والمحركات التي تشغّل ألعابنا." },
     category: "engineering",
     image: salemImg,
+    linkedin: "https://www.linkedin.com/in/salembah/",
   },
   {
     id: "5",
@@ -49,6 +52,7 @@ export const teamMembers: TeamMember[] = [
     bio: { en: "Defines the visual identity and art direction of our games.", ar: "تحدد الهوية البصرية والتوجيه الفني لألعابنا." },
     category: "art",
     image: anwarImg,
+    linkedin: "https://www.linkedin.com/in/anwaaralsayed/",
   },
   {
     id: "6",
