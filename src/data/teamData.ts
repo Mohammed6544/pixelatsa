@@ -14,6 +14,7 @@ export interface TeamMember {
   bio: Record<Language, string>;
   category: string;
   image: string;
+  linkedin?: string;
 }
 
 export const teamMembers: TeamMember[] = [
