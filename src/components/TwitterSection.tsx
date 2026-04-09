@@ -1,71 +1,135 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
+import { SiX } from "react-icons/si";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SiX } from "react-icons/si";
-import { ExternalLink } from "lucide-react";
+
+type EmbedState = "loading" | "ready" | "fallback";
+
+const TWITTER_WIDGET_URL = "https://platform.twitter.com/widgets.js";
+const TWITTER_PROFILE_URL = "https://x.com/PixelatGames";
 
 const TwitterSection = () => {
   const { t, isRTL } = useLanguage();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [embedLoaded, setEmbedLoaded] = useState(false);
-  const [embedFailed, setEmbedFailed] = useState(false);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [embedState, setEmbedState] = useState<EmbedState>("loading");
 
   useEffect(() => {
-    // Try loading Twitter's official widget
-    const timeout = setTimeout(() => {
-      // If after 5 seconds the widget hasn't rendered, show fallback
-      if (!embedLoaded) {
-        setEmbedFailed(true);
-      }
-    }, 5000);
+    let cancelled = false;
+    let fallbackTimeout = 0;
 
-    const loadWidget = () => {
-      if ((window as any).twttr?.widgets) {
-        (window as any).twttr.widgets.load(containerRef.current).then(() => {
-          setEmbedLoaded(true);
-          clearTimeout(timeout);
-        });
-        return;
-      }
-
-      const script = document.createElement("script");
-      script.src = "https://platform.twitter.com/widgets.js";
-      script.async = true;
-      script.onload = () => {
-        (window as any).twttr?.widgets?.load(containerRef.current).then(() => {
-          setEmbedLoaded(true);
-          clearTimeout(timeout);
-        });
-      };
-      script.onerror = () => {
-        setEmbedFailed(true);
-        clearTimeout(timeout);
-      };
-      document.body.appendChild(script);
+    const markFallback = () => {
+      if (cancelled) return;
+      window.clearTimeout(fallbackTimeout);
+      setEmbedState("fallback");
     };
 
-    loadWidget();
+    const markReadyIfRendered = () => {
+      if (cancelled) return;
 
-    return () => clearTimeout(timeout);
+      const iframe = timelineRef.current?.querySelector("iframe");
+      const iframeSrc = iframe?.getAttribute("src") ?? "";
+      const hasRealEmbed = Boolean(iframe && iframeSrc && iframeSrc !== "about:blank");
+
+      window.clearTimeout(fallbackTimeout);
+      setEmbedState(hasRealEmbed ? "ready" : "fallback");
+    };
+
+    const loadTwitterSdk = () =>
+      new Promise<any>((resolve, reject) => {
+        if ((window as any).twttr?.widgets?.createTimeline) {
+          resolve((window as any).twttr);
+          return;
+        }
+
+        const existingScript = document.querySelector<HTMLScriptElement>(`script[src="${TWITTER_WIDGET_URL}"]`);
+
+        const handleReady = () => {
+          const twttr = (window as any).twttr;
+
+          if (twttr?.ready) {
+            twttr.ready(() => resolve(twttr));
+            return;
+          }
+
+          if (twttr?.widgets?.createTimeline) {
+            resolve(twttr);
+            return;
+          }
+
+          reject(new Error("Twitter widgets unavailable"));
+        };
+
+        if (existingScript) {
+          existingScript.addEventListener("load", handleReady, { once: true });
+          window.setTimeout(() => {
+            if (!(window as any).twttr?.widgets?.createTimeline) {
+              reject(new Error("Twitter script timeout"));
+            }
+          }, 2500);
+          return;
+        }
+
+        const script = document.createElement("script");
+        script.src = TWITTER_WIDGET_URL;
+        script.async = true;
+        script.onload = handleReady;
+        script.onerror = () => reject(new Error("Failed to load Twitter SDK"));
+        document.body.appendChild(script);
+      });
+
+    const renderTimeline = async () => {
+      try {
+        const twttr = await loadTwitterSdk();
+        const container = timelineRef.current;
+
+        if (!container || cancelled) return;
+
+        container.innerHTML = "";
+
+        fallbackTimeout = window.setTimeout(markFallback, 4500);
+
+        await twttr.widgets.createTimeline(
+          {
+            sourceType: "profile",
+            screenName: "PixelatGames",
+          },
+          container,
+          {
+            dnt: true,
+            theme: "dark",
+            height: 600,
+            chrome: "noheader nofooter noborders transparent",
+          },
+        );
+
+        window.setTimeout(markReadyIfRendered, 600);
+      } catch {
+        markFallback();
+      }
+    };
+
+    renderTimeline();
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(fallbackTimeout);
+    };
   }, []);
 
   return (
-    <section className="py-24 px-4 bg-background" dir={isRTL ? "rtl" : "ltr"}>
-      <div className="max-w-4xl mx-auto">
+    <section className="bg-background px-4 py-24" dir={isRTL ? "rtl" : "ltr"}>
+      <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="mb-12 text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {t("twitter.title")}
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            {t("twitter.subtitle")}
-          </p>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">{t("twitter.title")}</h2>
+          <p className="text-lg text-muted-foreground">{t("twitter.subtitle")}</p>
         </motion.div>
 
         <motion.div
@@ -73,51 +137,43 @@ const TwitterSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          ref={containerRef}
+          className="relative"
         >
-          {/* Twitter embed - hidden if failed */}
-          <div className={embedFailed && !embedLoaded ? "hidden" : ""}>
-            {!embedLoaded && (
-              <div className="space-y-4">
-                <Skeleton className="h-32 w-full rounded-xl" />
-                <Skeleton className="h-32 w-full rounded-xl" />
-                <Skeleton className="h-32 w-full rounded-xl" />
-              </div>
-            )}
-            <a
-              className="twitter-timeline"
-              data-theme="dark"
-              data-height="600"
-              data-chrome="noheader nofooter noborders transparent"
-              href="https://x.com/PixelatGames"
-            >
-              Loading tweets…
-            </a>
-          </div>
+          {embedState === "loading" && (
+            <div className="space-y-4" aria-hidden="true">
+              <Skeleton className="h-32 w-full rounded-xl" />
+              <Skeleton className="h-32 w-full rounded-xl" />
+              <Skeleton className="h-32 w-full rounded-xl" />
+            </div>
+          )}
 
-          {/* Fallback when embed fails */}
-          {embedFailed && !embedLoaded && (
+          {embedState !== "fallback" && (
+            <div
+              ref={timelineRef}
+              className={embedState === "loading" ? "pointer-events-none absolute inset-0 opacity-0" : "min-h-[600px]"}
+            />
+          )}
+
+          {embedState === "fallback" && (
             <a
-              href="https://x.com/PixelatGames"
+              href={TWITTER_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="block group"
             >
-              <div className="rounded-2xl border border-border bg-card/50 p-8 md:p-12 text-center hover:border-primary/50 transition-all duration-300 hover:bg-card/80">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6 group-hover:bg-primary/20 transition-colors">
-                  <SiX className="w-8 h-8 text-primary" />
+              <div className="rounded-2xl border border-border bg-card/60 p-8 text-center transition-all duration-300 group-hover:border-primary/50 group-hover:bg-card/90 md:p-12">
+                <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
+                  <SiX className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-                  @PixelatGames
-                </h3>
-                <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                <h3 className="mb-3 text-xl font-bold text-foreground md:text-2xl">@PixelatGames</h3>
+                <p className="mx-auto mb-6 max-w-md text-muted-foreground">
                   {isRTL
-                    ? "تابعنا على X للحصول على آخر التحديثات والأخبار ومحتوى خلف الكواليس."
-                    : "Follow us on X for the latest updates, news, and behind-the-scenes content."}
+                    ? "تعذّر تحميل خلاصة X مباشرة، لكن يمكنك متابعة آخر التحديثات من حسابنا الرسمي."
+                    : "We couldn’t load the live X feed here, but you can still follow our latest updates on the official profile."}
                 </p>
-                <span className="inline-flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                  {isRTL ? "تابعنا على X" : "Follow us on X"}
-                  <ExternalLink className="w-4 h-4" />
+                <span className="inline-flex items-center gap-2 font-medium text-primary transition-all group-hover:gap-3">
+                  {isRTL ? "فتح حساب X" : "Open X profile"}
+                  <ExternalLink className="h-4 w-4" />
                 </span>
               </div>
             </a>
