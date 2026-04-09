@@ -79,16 +79,20 @@ const FeaturedGameCard = ({ game }: { game: Game }) => {
 
         {/* "Coming Soon" ribbon */}
         <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 z-10">
-          <motion.div
+          <motion.a
+            href="https://store.steampowered.com/app/4586090/Remaining_Kingdom/"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, type: "spring" }}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/40 backdrop-blur-sm"
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/40 backdrop-blur-sm hover:bg-primary/30 transition-colors"
           >
             <SiSteam size={16} className="text-primary" />
             <span className="text-sm font-bold text-primary">{t("games.comingSoon")}</span>
-          </motion.div>
+          </motion.a>
         </div>
 
         {/* Content */}
