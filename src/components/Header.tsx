@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 import { SiDiscord } from "react-icons/si";
 import logo from "@/assets/logo.jpg";
 
@@ -47,6 +47,15 @@ const Header = () => {
               {t(`nav.${link.key}`)}
             </a>
           ))}
+          <a
+            href="https://drive.google.com/drive/folders/1eNoVyY_I4FNt_8PsRyNbzYtlUbEfyWnk?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative flex items-center gap-2 px-4 py-2 rounded-md text-xs font-bold bg-gradient-to-r from-accent to-primary text-primary-foreground hover:opacity-90 transition-opacity shadow-lg shadow-primary/30"
+          >
+            <FileText size={16} />
+            {lang === "en" ? "Remaining Kingdom Press Kit" : "حقيبة صحفية"}
+          </a>
           <a
             href="https://discord.gg/8hsMbyZyxR"
             target="_blank"
@@ -94,6 +103,16 @@ const Header = () => {
                   {t(`nav.${link.key}`)}
                 </a>
               ))}
+              <a
+                href="https://drive.google.com/drive/folders/1eNoVyY_I4FNt_8PsRyNbzYtlUbEfyWnk?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-bold bg-gradient-to-r from-accent to-primary text-primary-foreground hover:opacity-90 transition-opacity shadow-lg shadow-primary/30"
+              >
+                <FileText size={16} />
+                {lang === "en" ? "Remaining Kingdom Press Kit" : "حقيبة صحفية"}
+              </a>
               <a
                 href="https://discord.gg/8hsMbyZyxR"
                 target="_blank"

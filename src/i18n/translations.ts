@@ -71,6 +71,7 @@ export const translations: Record<Language, Record<string, any>> = {
       subtitle: "Explore the worlds we've crafted.",
       availableOn: "Available on",
       comingSoon: "Coming to Steam",
+      pressKit: "Press Kit",
       game3: {
         title: "Remaining Kingdom",
         description:
@@ -176,6 +177,7 @@ export const translations: Record<Language, Record<string, any>> = {
       subtitle: "استكشف العوالم التي صنعناها.",
       availableOn: "متوفرة على",
       comingSoon: "قادمة على Steam",
+      pressKit: "حقيبة صحفية",
       game3: {
         title: "المملكة المتبقية",
         description:
