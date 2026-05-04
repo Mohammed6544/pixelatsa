@@ -1,6 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { ExternalLink, Sparkles } from "lucide-react";
+import { ExternalLink, Sparkles, FileText } from "lucide-react";
 import { SiSteam } from "react-icons/si";
 
 import game1Poster from "@/assets/games/game_1_poster.png";
@@ -77,8 +77,22 @@ const FeaturedGameCard = ({ game }: { game: Game }) => {
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent rtl:bg-gradient-to-l" />
         </div>
 
-        {/* "Coming Soon" ribbon */}
-        <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 z-10">
+        {/* Top-right action buttons */}
+        <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 z-10 flex items-center gap-2">
+          <motion.a
+            href="https://drive.google.com/drive/folders/1eNoVyY_I4FNt_8PsRyNbzYtlUbEfyWnk?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, type: "spring" }}
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-accent to-primary text-primary-foreground backdrop-blur-sm hover:opacity-90 transition-opacity shadow-lg shadow-primary/30"
+          >
+            <FileText size={16} />
+            <span className="text-sm font-bold">{t("games.pressKit")}</span>
+          </motion.a>
           <motion.a
             href="https://store.steampowered.com/app/4586090/Remaining_Kingdom/"
             target="_blank"
