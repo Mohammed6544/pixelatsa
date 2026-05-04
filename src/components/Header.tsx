@@ -54,7 +54,7 @@ const Header = () => {
             className="relative flex items-center gap-2 px-4 py-2 rounded-md text-xs font-bold bg-gradient-to-r from-accent to-primary text-primary-foreground hover:opacity-90 transition-opacity shadow-lg shadow-primary/30"
           >
             <FileText size={16} />
-            {lang === "en" ? "Remaining Kingdom Press Kit" : "حقيبة صحفية"}
+            {lang === "en" ? "Press Kit" : "حقيبة صحفية"}
           </a>
           <a
             href="https://discord.gg/8hsMbyZyxR"
@@ -111,7 +111,7 @@ const Header = () => {
                 className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-bold bg-gradient-to-r from-accent to-primary text-primary-foreground hover:opacity-90 transition-opacity shadow-lg shadow-primary/30"
               >
                 <FileText size={16} />
-                {lang === "en" ? "Remaining Kingdom Press Kit" : "حقيبة صحفية"}
+            {lang === "en" ? "Press Kit" : "حقيبة صحفية"}
               </a>
               <a
                 href="https://discord.gg/8hsMbyZyxR"
